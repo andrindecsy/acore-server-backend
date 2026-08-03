@@ -1,0 +1,11 @@
+{
+  "ConnectionStrings": {
+    "MetricsDb": "Server=localhost;Port=3306;Database=acore_monitoring;User=metrics_reader;Password=YOUR_PASSWORD_HERE;"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  }
+}
