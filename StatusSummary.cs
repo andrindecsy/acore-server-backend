@@ -1,7 +1,5 @@
 namespace ServerMetricsApi.Models;
 
-// Wird nicht direkt aus der DB gemappt, sondern im Repository
-// aus der letzten memory_log Zeile zusammengebaut.
 public class StatusSummary
 {
     public bool IsOnline { get; set; }
