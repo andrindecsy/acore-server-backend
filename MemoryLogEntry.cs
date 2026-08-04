@@ -1,8 +1,5 @@
 namespace ServerMetricsApi.Models;
 
-// Bildet eine Zeile aus der bestehenden memory_log Tabelle ab.
-// Die Property-Namen entsprechen bewusst (in PascalCase) den Spaltennamen,
-// damit Dapper sie automatisch zuordnen kann.
 public class MemoryLogEntry
 {
     public int Id { get; set; }
