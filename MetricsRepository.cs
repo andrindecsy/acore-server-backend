@@ -8,17 +8,11 @@ public class MetricsRepository
 {
     private readonly string _connectionString;
 
-    // Der Connection String wird per Dependency Injection aus appsettings.json
-    // hereingereicht (siehe Program.cs) - das Repository weiß selbst nichts
-    // über Konfiguration, nur wie man Queries baut.
     public MetricsRepository(string connectionString)
     {
         _connectionString = connectionString;
     }
 
-    // Für jede Anfrage eine frische, kurzlebige Connection zu öffnen ist bei
-    // MySqlConnector der empfohlene Weg - im Hintergrund wird intern gepoolt,
-    // sodass das nicht bei jedem Request eine neue TCP-Verbindung bedeutet.
     private MySqlConnection GetConnection() => new(_connectionString);
 
     public async Task<StatusSummary?> GetCurrentStatusAsync()
@@ -42,10 +36,6 @@ public class MetricsRepository
             return null;
         }
 
-        // Da minütlich geloggt wird: gilt der Server als "online", wenn die
-        // letzte Messung nicht älter als 3 Minuten ist. Fehlen mehrere
-        // Messungen hintereinander, ist wahrscheinlich der watchdog/logger
-        // selbst down oder der Server ist abgestürzt.
         DateTime lastTimestamp = latest.Timestamp;
         bool isOnline = DateTime.UtcNow - lastTimestamp < TimeSpan.FromMinutes(3);
 
